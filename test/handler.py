@@ -33,6 +33,8 @@ def handle(data):
     commands.append(mkdir_command)
     clone_command = 'git clone ' + git_url + ' /tmp/' + job_id + '/git'
     commands.append(clone_command)
+    mv_command = 'mv /tmp/' + job_id + '/git/' + script_name + ' /tmp/' + job_id + '/git/main.py'
+    commands.append(mv_command)
 
     #touch_command = 'touch ./'+ job_id + '/git/__init__.py;' + 'touch ./'+ job_id + '/__init__.py'
     #commands.append(touch_command)
@@ -49,7 +51,7 @@ def handle(data):
 
     sys.path.append(importlocation)
     try:
-        from sample import run 
+        from main import run 
         res = run(params=params)
     except Exception as e:
         res = "failed to import script: " + str(e)
